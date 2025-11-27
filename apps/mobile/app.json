@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "Meeting Booking",
+    "slug": "meeting-booking",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "meetingbooking",
+    "platforms": ["ios", "android"],
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "meeting-booking-poc"
+      }
+    }
+  }
+}

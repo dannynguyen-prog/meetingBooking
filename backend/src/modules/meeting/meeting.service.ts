@@ -6,15 +6,15 @@ import { EmailService } from '../notification/email.service';
 
 @Injectable()
 export class MeetingService {
-  constructor(private readonly prisma: PrismaService, private readonly emailService: EmailService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly emailService: EmailService
+  ) {}
 
   listForEmployee(employeeId: string) {
     return this.prisma.meeting.findMany({
       where: {
-        OR: [
-          { createdByEmployeeId: employeeId },
-          { guests: { some: { employeeId } } }
-        ]
+        OR: [{ createdByEmployeeId: employeeId }, { guests: { some: { employeeId } } }]
       },
       include: { room: true, guests: true },
       orderBy: { startTime: 'asc' }
@@ -45,7 +45,10 @@ export class MeetingService {
       },
       include: {
         guests: { include: { employee: true } },
-        room: true
+        room: true,
+        createdBy: {
+          select: { firstName: true, lastName: true }
+        }
       }
     });
 
@@ -88,7 +91,10 @@ export class MeetingService {
       },
       include: {
         guests: { include: { employee: true } },
-        room: true
+        room: true,
+        createdBy: {
+          select: { firstName: true, lastName: true }
+        }
       }
     });
 
@@ -101,7 +107,10 @@ export class MeetingService {
       where: { id: meetingId, companyId },
       include: {
         guests: { include: { employee: true } },
-        room: true
+        room: true,
+        createdBy: {
+          select: { firstName: true, lastName: true }
+        }
       }
     });
     if (!meeting) {
@@ -126,7 +135,12 @@ export class MeetingService {
     }
   }
 
-  private async ensureAvailability(roomId: string, start: Date, end: Date, excludeMeetingId?: string) {
+  private async ensureAvailability(
+    roomId: string,
+    start: Date,
+    end: Date,
+    excludeMeetingId?: string
+  ) {
     const conflict = await this.prisma.meeting.findFirst({
       where: {
         roomId,
@@ -140,18 +154,26 @@ export class MeetingService {
     }
   }
 
-  private async sendMeetingNotifications(meeting: any, action: 'created' | 'updated' | 'cancelled') {
+  private async sendMeetingNotifications(
+    meeting: any,
+    action: 'created' | 'updated' | 'cancelled'
+  ) {
     const subject = `Meeting ${action}: ${meeting.title}`;
-    const html = `<p>Your meeting "${meeting.title}" has been ${action}.<p>
-    <p>Room: ${meeting.room?.name}</p>
-    <p>Start: ${meeting.startTime}</p>
-    <p>End: ${meeting.endTime}</p>`;
+    const html = this.emailService.buildMeetingHtml({
+      title: meeting.title,
+      roomName: meeting.room?.name ?? 'Unassigned',
+      startTime: meeting.startTime.toISOString(),
+      endTime: meeting.endTime.toISOString(),
+      ownerName: meeting.createdBy?.firstName ?? 'Organizer',
+      action
+    });
 
-    const recipients = meeting.guests
-      .map((guest) => guest.employee.email)
-      .filter(Boolean);
+    const recipients = meeting.guests.map((guest) => guest.employee.email).filter(Boolean);
 
-    await Promise.all(recipients.map((email: string) => this.emailService.sendMeetingUpdateEmail(email, subject, html)));
+    await Promise.all(
+      recipients.map((email: string) =>
+        this.emailService.sendMeetingUpdateEmail(email, subject, html)
+      )
+    );
   }
 }
-

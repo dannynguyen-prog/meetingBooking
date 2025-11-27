@@ -34,21 +34,20 @@
   - [x] 2.4 Implement invitation service (create, resend, expiry check) + SendGrid/Resend integration
   - [x] 2.5 Implement meeting availability endpoints (room filtering, create/edit/cancel meeting with guest notifications)
   - [x] 2.6 Implement audit logging middleware/interceptor + API tests
-- [ ] 3.0 Build web admin POC (Next.js App Router, Chakra UI, TanStack Query)
-  - [ ] 3.1 Set up Next.js app with Chakra theme + auth layout (System vs Company Admin views)
-  - [ ] 3.2 Implement System Admin dashboard (metrics, company list w/ filters)
-  - [ ] 3.3 Implement company CRUD pages + company admin management (invite/resend/deactivate)
-  - [ ] 3.4 Implement meeting room CRUD UI + employee management for Company Admin
-  - [ ] 3.5 Wire API client with TanStack Query + optimistic updates/tests
-- [ ] 4.0 Build mobile employee POC (Expo React Native, React Query, calendar/booking flows)
-  - [ ] 4.1 Initialize Expo app with theming + navigation and auth onboarding
-  - [ ] 4.2 Implement dashboard (upcoming meetings, quick actions)
-  - [ ] 4.3 Implement booking flow (title/details, time pickers, guest selection, room availability call)
-  - [ ] 4.4 Implement calendar view using `react-native-calendars` (day/week/month + meeting detail)
-  - [ ] 4.5 Implement edit/cancel flow with confirmation + API integration
-- [ ] 5.0 Implement cross-cutting concerns (audit logging, invitations, deployment & QA checklist)
-  - [ ] 5.1 Build shared email templates package (System Admin, Company Admin, Employee invites/updates)
-  - [ ] 5.2 Ensure audit log viewer/export (admin access) and add monitoring hooks
-  - [ ] 5.3 Document deployment steps (Render/Railway + Expo EAS + .env management)
-  - [ ] 5.4 QA checklist covering timezone tests, invitation expiry, meeting edit/cancel notifications
-
+- [x] 3.0 Build web admin POC (Next.js App Router, Chakra UI, TanStack Query)
+  - [x] 3.1 Set up Next.js app with Chakra theme + auth layout (System vs Company Admin views)
+  - [x] 3.2 Implement System Admin dashboard (metrics, company list w/ filters)
+  - [x] 3.3 Implement company CRUD pages + company admin management (invite/resend/deactivate)
+  - [x] 3.4 Implement meeting room CRUD UI + employee management for Company Admin
+  - [x] 3.5 Wire API client with TanStack Query + optimistic updates/tests
+- [x] 4.0 Build mobile employee POC (Expo React Native, React Query, calendar/booking flows)
+  - [x] 4.1 Initialize Expo app with theming + navigation and auth onboarding
+  - [x] 4.2 Implement dashboard (upcoming meetings, quick actions)
+  - [x] 4.3 Implement booking flow (title/details, time pickers, guest selection, room availability call)
+  - [x] 4.4 Implement calendar view using `react-native-calendars` (day/week/month + meeting detail)
+  - [x] 4.5 Implement edit/cancel flow with confirmation + API integration
+- [x] 5.0 Implement cross-cutting concerns (audit logging, invitations, deployment & QA checklist)
+  - [x] 5.1 Build shared email templates package (System Admin, Company Admin, Employee invites/updates)
+  - [x] 5.2 Ensure audit log viewer/export (admin access) and add monitoring hooks
+  - [x] 5.3 Document deployment steps (Render/Railway + Expo EAS + .env management)
+  - [x] 5.4 QA checklist covering timezone tests, invitation expiry, meeting edit/cancel notifications

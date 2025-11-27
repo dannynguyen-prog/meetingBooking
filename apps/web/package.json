@@ -9,6 +9,24 @@
     "lint": "next lint",
     "test": "echo \"(todo) web tests\"",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\""
+  },
+  "dependencies": {
+    "@chakra-ui/react": "2.8.2",
+    "@emotion/react": "11.11.4",
+    "@emotion/styled": "11.11.5",
+    "@tanstack/react-query": "5.59.6",
+    "@tanstack/react-query-devtools": "5.59.6",
+    "axios": "1.7.7",
+    "framer-motion": "11.3.31",
+    "jotai": "2.15.1",
+    "next": "14.2.13",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.30",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0"
   }
 }
-

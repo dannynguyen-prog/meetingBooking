@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as sgMail from '@sendgrid/mail';
+import { inviteTemplate, meetingUpdateTemplate } from '@meeting-booking/email-templates';
 
 @Injectable()
 export class EmailService {
@@ -25,8 +26,13 @@ export class EmailService {
     await sgMail.send({
       to,
       from: 'no-reply@meetingbooking.app',
-      subject: 'You have been invited to Meeting Booking',
-      html: `<p>You have been invited as <strong>${role}</strong>.</p><p><a href="${inviteLink}">Complete your signup</a>. The link expires in 48 hours.</p>`
+      subject: 'Meeting Booking invitation',
+      html: inviteTemplate({
+        recipientName: to,
+        role: role as any,
+        inviteLink,
+        expiresInHours: 48
+      })
     });
   }
 
@@ -44,5 +50,15 @@ export class EmailService {
       html
     });
   }
-}
 
+  buildMeetingHtml(payload: {
+    title: string;
+    roomName: string;
+    startTime: string;
+    endTime: string;
+    ownerName: string;
+    action: 'created' | 'updated' | 'cancelled';
+  }) {
+    return meetingUpdateTemplate(payload);
+  }
+}
