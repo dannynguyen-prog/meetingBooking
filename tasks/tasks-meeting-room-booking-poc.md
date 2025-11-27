@@ -21,12 +21,12 @@
 
 - [ ] 0.0 Create feature branch
   - [x] 0.1 Create and checkout `feature/meeting-room-booking-poc`
-  - [ ] 0.2 Push the new branch to origin for collaboration
+  - [x] 0.2 Push the new branch to origin for collaboration
 - [ ] 1.0 Establish monorepo structure & core tooling (pnpm workspaces, shared configs)
-  - [ ] 1.1 Initialize pnpm workspace (root `package.json`, `pnpm-workspace.yaml`)
-  - [ ] 1.2 Scaffold packages/apps (`backend`, `apps/web`, `apps/mobile`, `packages/email-templates`)
-  - [ ] 1.3 Configure shared TypeScript, ESLint, Prettier, and Husky hooks if needed
-  - [ ] 1.4 Add CI workflow stub (lint/test) to ensure workspace builds
+  - [x] 1.1 Initialize pnpm workspace (root `package.json`, `pnpm-workspace.yaml`)
+  - [x] 1.2 Scaffold packages/apps (`backend`, `apps/web`, `apps/mobile`, `packages/email-templates`)
+  - [x] 1.3 Configure shared TypeScript, ESLint, Prettier, and Husky hooks if needed
+  - [x] 1.4 Add CI workflow stub (lint/test) to ensure workspace builds
 - [ ] 2.0 Implement backend foundation (NestJS + Prisma + PostgreSQL + auth/email services)
   - [ ] 2.1 Scaffold NestJS project with modules: Auth, Company, User, MeetingRoom, Meeting, Invitation
   - [ ] 2.2 Define Prisma schema (companies, company_admins, employees, meeting_rooms, meetings, meeting_guests, audit_logs, invitation_tokens)

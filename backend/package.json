@@ -1,0 +1,13 @@
+{
+  "name": "@meeting-booking/backend",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "nest start --watch",
+    "build": "nest build",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "test": "echo \"(todo) backend tests\"",
+    "format": "prettier --write \"src/**/*.{ts,tsx,json}\""
+  }
+}
+

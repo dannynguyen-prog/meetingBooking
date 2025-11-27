@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@meeting-booking/backend/*": ["backend/src/*"],
+      "@meeting-booking/web/*": ["apps/web/src/*"],
+      "@meeting-booking/mobile/*": ["apps/mobile/src/*"],
+      "@meeting-booking/email-templates/*": ["packages/email-templates/src/*"],
+      "@meeting-booking/shared/*": ["packages/*/src/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
+
