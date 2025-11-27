@@ -28,12 +28,12 @@
   - [x] 1.3 Configure shared TypeScript, ESLint, Prettier, and Husky hooks if needed
   - [x] 1.4 Add CI workflow stub (lint/test) to ensure workspace builds
 - [ ] 2.0 Implement backend foundation (NestJS + Prisma + PostgreSQL + auth/email services)
-  - [ ] 2.1 Scaffold NestJS project with modules: Auth, Company, User, MeetingRoom, Meeting, Invitation
-  - [ ] 2.2 Define Prisma schema (companies, company_admins, employees, meeting_rooms, meetings, meeting_guests, audit_logs, invitation_tokens)
-  - [ ] 2.3 Implement JWT auth (signup via invitations, login, role guards, last_login tracking)
-  - [ ] 2.4 Implement invitation service (create, resend, expiry check) + SendGrid/Resend integration
-  - [ ] 2.5 Implement meeting availability endpoints (room filtering, create/edit/cancel meeting with guest notifications)
-  - [ ] 2.6 Implement audit logging middleware/interceptor + API tests
+  - [x] 2.1 Scaffold NestJS project with modules: Auth, Company, User, MeetingRoom, Meeting, Invitation
+  - [x] 2.2 Define Prisma schema (companies, company_admins, employees, meeting_rooms, meetings, meeting_guests, audit_logs, invitation_tokens)
+  - [x] 2.3 Implement JWT auth (signup via invitations, login, role guards, last_login tracking)
+  - [x] 2.4 Implement invitation service (create, resend, expiry check) + SendGrid/Resend integration
+  - [x] 2.5 Implement meeting availability endpoints (room filtering, create/edit/cancel meeting with guest notifications)
+  - [x] 2.6 Implement audit logging middleware/interceptor + API tests
 - [ ] 3.0 Build web admin POC (Next.js App Router, Chakra UI, TanStack Query)
   - [ ] 3.1 Set up Next.js app with Chakra theme + auth layout (System vs Company Admin views)
   - [ ] 3.2 Implement System Admin dashboard (metrics, company list w/ filters)

@@ -1,0 +1,140 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id           String          @id @default(cuid())
+  name         String
+  logoUrl      String?
+  address      String?
+  industry     String?
+  status       CompanyStatus   @default(ACTIVE)
+  admins       CompanyAdmin[]
+  employees    Employee[]
+  rooms        MeetingRoom[]
+  meetings     Meeting[]
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+model CompanyAdmin {
+  id           String        @id @default(cuid())
+  companyId    String
+  company      Company       @relation(fields: [companyId], references: [id])
+  firstName    String
+  lastName     String
+  email        String        @unique
+  passwordHash String
+  status       UserStatus    @default(ACTIVE)
+  lastLoginAt  DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Employee {
+  id           String        @id @default(cuid())
+  companyId    String
+  company      Company       @relation(fields: [companyId], references: [id])
+  firstName    String
+  lastName     String
+  email        String        @unique
+  passwordHash String
+  status       UserStatus    @default(ACTIVE)
+  lastLoginAt  DateTime?
+  meetings     Meeting[]     @relation("EmployeeMeetings")
+  guestMeetings MeetingGuest[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model MeetingRoom {
+  id           String       @id @default(cuid())
+  companyId    String
+  company      Company      @relation(fields: [companyId], references: [id])
+  name         String
+  capacity     Int
+  availableFrom Int
+  availableTo   Int
+  location     String?
+  images       Json?
+  status       RoomStatus   @default(ACTIVE)
+  meetings     Meeting[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Meeting {
+  id                   String         @id @default(cuid())
+  companyId            String
+  company              Company        @relation(fields: [companyId], references: [id])
+  createdByEmployeeId  String
+  createdBy            Employee       @relation("EmployeeMeetings", fields: [createdByEmployeeId], references: [id])
+  roomId               String
+  room                 MeetingRoom    @relation(fields: [roomId], references: [id])
+  title                String
+  startTime            DateTime
+  endTime              DateTime
+  details              String?
+  guests               MeetingGuest[]
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+}
+
+model MeetingGuest {
+  id          String    @id @default(cuid())
+  meetingId   String
+  meeting     Meeting   @relation(fields: [meetingId], references: [id])
+  employeeId  String
+  employee    Employee  @relation(fields: [employeeId], references: [id])
+  createdAt   DateTime  @default(now())
+}
+
+model InvitationToken {
+  id            String        @id @default(cuid())
+  email         String
+  role          InvitationRole
+  companyId     String?
+  token         String        @unique
+  expiresAt     DateTime
+  acceptedAt    DateTime?
+  createdAt     DateTime      @default(now())
+}
+
+model AuditLog {
+  id         String        @id @default(cuid())
+  actorId    String?
+  actorRole  String?
+  entityType String
+  entityId   String?
+  action     String
+  metadata   Json?
+  createdAt  DateTime      @default(now())
+}
+
+enum CompanyStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum RoomStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum InvitationRole {
+  SYSTEM_ADMIN
+  COMPANY_ADMIN
+  EMPLOYEE
+}
+
